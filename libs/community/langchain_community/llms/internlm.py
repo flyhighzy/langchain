@@ -69,11 +69,8 @@ class LMDeployBackend(Backend):
             
             if response.status_code == 200:
                 parsed_json = json.loads(response.text)
-                logger.info(f"get response: {parsed_json}")
-                print(parsed_json)
                 return parsed_json["choices"][0]["message"]["content"]
             else:
-                logger.info(f"response: {response.content}")
                 response.raise_for_status()
         except Exception as e:
             raise ValueError(f"An error has occurred: {e}")
